@@ -10,22 +10,6 @@ DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 FILES = {name: os.path.join(DATA_DIR, name + ".pkl") for name in
          ("patients", "medical_users", "inventory", "consumption", "deliveries", "notifications", "history", "sessions", "settings")}
 
-def _seed():
-    patients = {}
-    names = ["Aarav Mehta", "Maya Singh", "Rohan Patel", "Anika Sharma", "Kabir Rao", "Isha Nair"]
-    for i, name in enumerate(names, 1):
-        pid = f"P{i:03d}"
-        patients[pid] = {"patient_id": pid, "name": name, "age": 25 + i * 4, "address": f"{i} Lake View Road, Pune",
-            "contact": f"+91 90000 100{i:02d}", "diabetes_type": "Type 2 diabetes", "insulin_type": "Rapid-acting" if i % 2 else "Long-acting",
-            "daily_consumption": 10, "units_available": 100,
-            "emergency_contact": f"+91 98888 200{i:02d}", "officer_id": "M001",
-            "delivery_details": "Home delivery", "address_private": False}
-    return {"patients": patients,
-        "medical_users": {"M001": {"user_id":"M001", "name":"Dr. Vijay Katkar", "password":"care123", "role":"medical", "contact":"+91 90000 00001", "supplier":"Pune Care Pharmacy"}},
-        "inventory": {"Pune Care Pharmacy": {"Rapid-acting": 1550, "Long-acting": 1500}},
-        "consumption": {f"P{i:03d}": {"values":[10.0]*5, "index":0, "history":[]} for i in range(1,7)},
-        "deliveries": [], "notifications": [], "history": [], "sessions": {}, "settings": {}}
-
 def load_all():
     os.makedirs(DATA_DIR, exist_ok=True)
     seed = _seed()
@@ -117,6 +101,23 @@ def load_all():
         save("sessions",data["sessions"])
         save("settings",data["settings"])
     return data
+
+
+def _seed():
+    patients = {}
+    names = ["Aarav Mehta", "Maya Singh", "Rohan Patel", "Anika Sharma", "Kabir Rao", "Isha Nair"]
+    for i, name in enumerate(names, 1):
+        pid = f"P{i:03d}"
+        patients[pid] = {"patient_id": pid, "name": name, "age": 25 + i * 4, "address": f"{i} Lake View Road, Pune",
+            "contact": f"+91 90000 100{i:02d}", "diabetes_type": "Type 2 diabetes", "insulin_type": "Rapid-acting" if i % 2 else "Long-acting",
+            "daily_consumption": 10, "units_available": 100,
+            "emergency_contact": f"+91 98888 200{i:02d}", "officer_id": "M001",
+            "delivery_details": "Home delivery", "address_private": False}
+    return {"patients": patients,
+        "medical_users": {"M001": {"user_id":"M001", "name":"Dr. Vijay Katkar", "password":"care123", "role":"medical", "contact":"+91 90000 00001", "supplier":"Pune Care Pharmacy"}},
+        "inventory": {"Pune Care Pharmacy": {"Rapid-acting": 1550, "Long-acting": 1500}},
+        "consumption": {f"P{i:03d}": {"values":[10.0]*5, "index":0, "history":[]} for i in range(1,7)},
+        "deliveries": [], "notifications": [], "history": [], "sessions": {}, "settings": {}}
 
 def load(key):
     path = FILES[key]
