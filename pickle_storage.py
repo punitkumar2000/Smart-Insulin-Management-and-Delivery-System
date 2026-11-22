@@ -122,11 +122,12 @@ def load(key):
     path = FILES[key]
     with open(path, "rb") as f: return pickle.load(f)
 
+def log_event(history, patient_id, event, details=""):
+    history.append({"date": date.today().isoformat(), "patient_id": patient_id, "event": event, "details": details})
+
+
 def save(key, value):
     os.makedirs(DATA_DIR, exist_ok=True)
     temp = FILES[key] + ".tmp"
     with open(temp, "wb") as f: pickle.dump(value, f, protocol=pickle.HIGHEST_PROTOCOL)
     os.replace(temp, FILES[key])
-
-def log_event(history, patient_id, event, details=""):
-    history.append({"date": date.today().isoformat(), "patient_id": patient_id, "event": event, "details": details})

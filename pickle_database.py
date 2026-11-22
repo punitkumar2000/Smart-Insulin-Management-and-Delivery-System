@@ -8,16 +8,16 @@ def get_all():
     return load_all_from_storage()
 
 
-def save_many(**collections):
-    """Save changed collections through one small, consistent helper."""
-    for collection, records in collections.items():
-        save(collection, records)
-
-
 def get(collection, key=None):
     """Read a whole collection or one record from a dictionary collection."""
     records = load(collection)
     return records if key is None else records.get(key)
+
+
+def save_many(**collections):
+    """Save changed collections through one small, consistent helper."""
+    for collection, records in collections.items():
+        save(collection, records)
 
 
 def add(collection, record, key=None):
