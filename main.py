@@ -52,7 +52,7 @@ def show_login():
             except APIError as error:
                 st.error(str(error))
         with st.expander("Sample login credentials"):
-            st.markdown("**Patients:** P001–P006, password `patient123`  \n**Medical officer:** M001 / `care123`")
+            st.markdown("**Patients:** P001–P006, password `patient123 or punit@123 or pranay@123`  \n**Medical officer:** M001 / `care123`")
 
 
 def show_dashboard(user, token):
