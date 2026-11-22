@@ -1,7 +1,7 @@
 """Demo authentication and role lookup."""
 def authenticate(username, password, patients, medical_users):
     for pid, p in patients.items():
-        if username.strip().lower() in (pid.lower(), p["name"].lower()) and password == "patient123" or password == "patient112233":
+        if username.strip().lower() in (pid.lower(), p["name"].lower()) and password == "patient123" or password == "punit@123" or password == "pranay@123" :
             return {"id": pid, "role": "patient", **p}
     user = medical_users.get(username.strip().upper())
     if user and user["password"] == password:
