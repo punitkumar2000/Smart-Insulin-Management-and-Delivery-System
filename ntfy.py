@@ -1,6 +1,5 @@
 """Send generic push notifications through ntfy's public HTTP API."""
 from urllib.parse import quote
-
 import requests
 
 
